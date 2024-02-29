@@ -7,7 +7,7 @@ if (isset($_POST['simpan'])) {
     $nama = $_POST['nama'];
     $kode_barang = $_POST['kode_barang'];
     $harga = $_POST['harga'];
-    $jumlah = $_POST['j umlah'];
+    $jumlah = $_POST['jumlah'];
 	$merk = $_POST['merk'];
 	$beli = $_POST['harga_beli'];
 	$satuan = $_POST['satuan'];
@@ -22,6 +22,11 @@ if (isset($_POST['simpan'])) {
 
     // mengalihkan halaman ke list barang
     header('location: index.php?page=barang');
+    if($result){
+        echo '<script>alert("Restok berhasil."); window.location="index.php?page=barang";</script>';
+    } else {
+        echo '<script>alert("Restok gagal.");</script>';
+    }
 }
 
 ?>
@@ -52,7 +57,7 @@ if (isset($_POST['simpan'])) {
                                 <tr>
                                     <td>Harga Beli</td>
                                     <td><input type="number" placeholder="Harga beli" required class="form-control"
-                                            name="beli"></td>
+                                            name="harga_beli"></td>
                                 </tr>
                                 <tr>
                                     <td>Jumlah</td>
@@ -65,18 +70,18 @@ if (isset($_POST['simpan'])) {
                                         <select name="satuan" class="form-control" required>
                                             <option value="#">Pilih Satuan</option>
                                             <option value="PCS">PCS</option>
+                                            <option value="Satuan">Satuan</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal Input</td>
-                                    <td><input type="text" required readonly="readonly" class="form-control"
-                                            value="<?php echo  date("j F Y, G:i");?>" name="tgl"></td>
+                                    <td><input type="text" name="tgl_input" class="form-control" placeholder="Tanggal Input" value="<?php echo  date("j F Y, G:i");?>">
                                 </tr>
                             </table>
                         </div>
 	  
   		<input type="submit" name="simpan" value="Simpan" class="btn btn-primary">
-  		<a href="?page=barang" class="btn btn-warning" >Kembali</a>
+  		<a href="index.php?page=barang" class="btn btn-danger" onclick="return confirm('apakah data tidak akan di lanjutkan?')">Kembali</a>
 	</form>
 </div>

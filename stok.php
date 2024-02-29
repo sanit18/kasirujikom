@@ -2,7 +2,7 @@
 include 'authcheck.php';
 
 $view = $dbconnect->query('SELECT * FROM barang');
-$query= mysqli_query($dbconnect, "SELECT DISTINCT(jumlah) as jumlah, COUNT(jumlah) as jumlah FROM barang GROUP BY jumlah");
+
 ?>
 
 
@@ -18,13 +18,14 @@ $query= mysqli_query($dbconnect, "SELECT DISTINCT(jumlah) as jumlah, COUNT(jumla
         }
         $_SESSION['success'] = '';
     ?>
-
-	<h1>List Barang</h1>
-	<a href="index.php?page=stok" class="btn btn-primary">Tabel Stok</a>
+	
+	<h1>List Stok</h1>
+	<a href="index.php?page=barang_add" class="btn btn-primary">Tambah data</a>
+	<a href="index.php?page=barang" class="btn btn-primary">Tabel Barang</a>
 	
 	<hr>
 	<table class="table table-bordered">
-		<tr style="background:#E9967A;color:#333;">
+		<tr style="background:#5F9EA0;color:#333;">
 			<th>ID Barang</th>
 			<th>Kode</th>
 			<th>Nama</th>
@@ -41,7 +42,7 @@ $query= mysqli_query($dbconnect, "SELECT DISTINCT(jumlah) as jumlah, COUNT(jumla
 
         while ($row = $view->fetch_array()) { ?>
 
-		<tr style="background:#FAEBD7;color:#333;">
+		<tr style="background:#F0F8FF;color:#333;">
 			<td> <?= $row['id_barang'] ?> </td>
 			<td> <?= $row['kode_barang'] ?> </td>
 			<td><?= $row['nama'] ?></td>
@@ -53,9 +54,9 @@ $query= mysqli_query($dbconnect, "SELECT DISTINCT(jumlah) as jumlah, COUNT(jumla
 			<td><?=$row['tgl_input']?></td>
 			<td><?=$row['tgl_update']?></td>
 			<td>	
-
-				<a href="index.php?page=barang_hapus&id=<?= $row['id_barang'] ?>" onclick="return confirm('apakah anda yakin?')">Hapus</a>
-				
+				<a href="index.php?page=barang_edit&id=<?= $row['id_barang'] ?>">Edit</a> |
+				<a href="index.php?page=barang_hapus&id=<?= $row['id_barang'] ?>" onclick="return confirm('apakah anda yakin?')">Hapus</a>|
+				<a href="index.php?page=restok&id=<?= $row['id_barang'] ?>">Restok</a>
 			</td>
 		</tr>
 
